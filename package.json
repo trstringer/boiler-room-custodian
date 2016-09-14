@@ -1,0 +1,18 @@
+{
+  "name": "boiler-room-janitor",
+  "version": "0.1.0",
+  "description": "mop up those boilerplates",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Thomas Stringer",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^3.5.0"
+  },
+  "dependencies": {
+    "commander": "^2.9.0"
+  }
+}
