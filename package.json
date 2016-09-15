@@ -2,15 +2,17 @@
   "name": "boiler-room-janitor",
   "version": "0.1.0",
   "description": "mop up those boilerplates",
-  "main": "index.js",
+  "main": "./bin/mop",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "keywords": [],
   "author": "Thomas Stringer",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^3.5.0"
+    "chai": "^3.5.0",
+    "eslint": "^3.5.0",
+    "mocha": "^3.0.2"
   },
   "dependencies": {
     "commander": "^2.9.0"
