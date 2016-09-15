@@ -9,4 +9,7 @@ module.exports = () => {
 
   fs.createReadStream(`${__dirname}/repo/test-file3.save.txt`)
     .pipe(fs.createWriteStream(`${__dirname}/repo/test-file3.txt`));
+
+  fs.unlink(`${__dirname}/repo/new-add-file1.txt`);
+  fs.unlink(`${__dirname}/repo/new-add-file2.txt`);
 };

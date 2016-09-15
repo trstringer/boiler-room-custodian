@@ -3,6 +3,7 @@ const testUtil = require('./util');
 const refresh = require('./refresh');
 const config = require('../app/modules/config');
 const remove = require('../app/modules/file-ops').remove;
+const add = require('../app/modules/file-ops').add;
 
 /* eslint-disable no-undef */
 describe('moperations', () => {
@@ -14,12 +15,25 @@ describe('moperations', () => {
   });
 
   it('should remove files', (done) => {
-    mopConfig.remove.forEach((fileConfig) => {
+    mopConfig.remove.forEach((fileConfig, index, array) => {
       const fileToRemove = `${mopConfig.rootdir}/${fileConfig.file}`; 
-      remove(fileToRemove, assert.isUndefined);
+      remove(fileToRemove, assert.isNull);
       testUtil.fileExists(fileToRemove, assert.isFalse);
+      if (index === array.length - 1) {
+        done();
+      }
     });
-    done();
+  });
+
+  it('should add files', (done) => {
+    mopConfig.add.forEach((fileConfig, index, array) => {
+      const fileToAdd = `${mopConfig.rootdir}/${fileConfig.file}`;
+      add(fileToAdd, (err) => assert.isUndefined(err));
+      testUtil.fileExists(fileToAdd, assert.isTrue);
+      if (index === array.length - 1) {
+        done();
+      }
+    });
   });
 
   after(refresh);

@@ -10,6 +10,7 @@ module.exports = {
     }
   ],
   add: [
-    { file: 'new-add-file1.txt' }
+    { file: 'new-add-file1.txt' },
+    { file: 'new-add-file2.txt' }
   ]
 };
