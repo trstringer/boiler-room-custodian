@@ -29,7 +29,7 @@ describe('moperations', () => {
   it('should add files', (done) => {
     mopConfig.add.forEach((fileConfig, index, array) => {
       const fileToAdd = `${mopConfig.rootdir}/${fileConfig.file}`;
-      add(fileToAdd, (err) => assert.isFalse(err));
+      add(fileToAdd, (err) => assert.isNull(err));
       testUtil.fileExists(fileToAdd, assert.isTrue);
       if (index === array.length - 1) {
         done();
@@ -42,7 +42,7 @@ describe('moperations', () => {
       const fileToClean = `${mopConfig.rootdir}/${fileConfig.file}`;
       
       if (fileConfig.clear) {
-        clear(fileToClean, (err) => assert.isFalse(err));
+        clear(fileToClean, (err) => assert.isNull(err));
         testUtil.fileIsEmpty(fileToClean, assert.isFalse);
       }
 
