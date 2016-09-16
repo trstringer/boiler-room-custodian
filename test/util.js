@@ -6,8 +6,20 @@ module.exports = (() => {
       callback(err === undefined);
     });
   }
+
+  function fileIsEmpty(file, callback) {
+    fs.readFile(file, (err, data) => {
+      if (err) {
+        throw err;
+      }
+      else {
+        callback(data === '');
+      }
+    });
+  }
   
   return {
-    fileExists
+    fileExists,
+    fileIsEmpty
   };
 })();
