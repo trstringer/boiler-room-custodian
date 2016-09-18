@@ -39,6 +39,7 @@ module.exports = (done) => {
     copyFile(`${__dirname}/repo/test-file2.save.txt`, `${__dirname}/repo/test-file2.txt`),
     copyFile(`${__dirname}/repo/test-file3.save.txt`, `${__dirname}/repo/test-file3.txt`),
     copyFile(`${__dirname}/repo/child-dir/test-file4.save.txt`, `${__dirname}/repo/child-dir/test-file4.txt`),
+    copyFile(`${__dirname}/repo/child-dir/test-file5.save.txt`, `${__dirname}/repo/child-dir/test-file5.txt`),
     removeFile(`${__dirname}/repo/new-add-file1.txt`),
     removeFile(`${__dirname}/repo/new-add-file2.txt`),
     removeFile(`${__dirname}/repo/child-dir/.gitkeep`)
