@@ -5,6 +5,7 @@ const config = require('../app/modules/config');
 const remove = require('../app/modules/file-ops').remove;
 const add = require('../app/modules/file-ops').add;
 const clear = require('../app/modules/file-ops').clear;
+const deleteLine = require('../app/modules/file-ops').deleteLine;
 
 /* eslint-disable no-undef */
 describe('moperations', () => {
@@ -44,6 +45,11 @@ describe('moperations', () => {
       if (fileConfig.clear) {
         clear(fileToClean, (err) => assert.isNull(err));
         testUtil.fileIsEmpty(fileToClean, assert.isFalse);
+      }
+      else if (fileConfig.pattern) {
+        deleteLine(fileToClean, fileConfig.pattern, () => {
+          console.log('i am done');
+        });
       }
 
       if (index === array.length - 1) {
