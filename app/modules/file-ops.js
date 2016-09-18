@@ -25,7 +25,15 @@ module.exports = (() => {
     });
     source.on('close', () => {
       tempFileStream.close();
-      callback();
+      // delete the old file and rename the temp file
+      fs.unlink(file, (err) => {
+        if (err) {
+          callback(err);
+        }
+        else {
+          fs.rename(tempFileName, file, callback);
+        }
+      });
     });
   }
 

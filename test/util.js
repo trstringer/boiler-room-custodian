@@ -17,9 +17,21 @@ module.exports = (() => {
       }
     });
   }
+
+  function fileContainsPattern(file, pattern, callback) {
+    fs.readFile(file, 'utf-8', (err, data) => {
+      if (err) {
+        throw err;
+      }
+      else {
+        callback(data.match(pattern) !== null);
+      }
+    });
+  }
   
   return {
     fileExists,
-    fileIsEmpty
+    fileIsEmpty,
+    fileContainsPattern
   };
 })();

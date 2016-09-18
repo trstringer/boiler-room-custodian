@@ -48,7 +48,7 @@ describe('moperations', () => {
       }
       else if (fileConfig.pattern) {
         deleteLine(fileToClean, fileConfig.pattern, () => {
-          console.log('i am done');
+          testUtil.fileContainsPattern(fileToClean, fileConfig.pattern, assert.isFalse);
         });
       }
 
