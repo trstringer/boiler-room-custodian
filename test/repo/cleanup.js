@@ -8,6 +8,10 @@ module.exports = {
     {
       file: 'test-file3.txt',
       clear: true
+    },
+    {
+      file: 'child-dir/test-file5.txt',
+      pattern: /blah/
     }
   ],
   add: [
