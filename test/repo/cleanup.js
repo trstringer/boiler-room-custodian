@@ -1,7 +1,7 @@
 module.exports = {
   remove: [
     { file: 'test-file1.txt' },
-    { file: 'test-file2.txt', optional: true },
+    { file: 'test-file2.txt' },
     { file: 'test-file4.txt' }
   ],
   clean: [
