@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "mop up those boilerplates",
   "main": "./bin/mop",
+  "bin": {
+    "mop": "./app/mop.js"
+  },
   "scripts": {
     "test": "mocha"
   },
