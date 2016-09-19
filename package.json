@@ -1,5 +1,5 @@
 {
-  "name": "boiler-room-janitor",
+  "name": "boiler-room-custodian",
   "version": "0.1.1",
   "description": "mop up those boilerplates",
   "main": "./bin/mop",
