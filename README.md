@@ -29,6 +29,8 @@ Ideally the best place for a cleanup configuration to be stored would be in the 
 
 *The below example uses a cleanup configuration for the extremely useful [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)*
 
+**[Pull Request illustrating the code changes for this boilerplate](https://github.com/chentsulin/electron-react-boilerplate/pull/402)**
+
 ```javascript
 module.exports = {
   // remove the following files as they are mostly 
