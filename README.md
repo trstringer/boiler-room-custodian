@@ -20,12 +20,12 @@ Ideally the best place for a cleanup configuration to be stored would be in the 
 ## :boom: (boilerplate maintainers) What should you do? :boom:
 
  1. `npm install --save-dev boiler-room-custodian`
- 2. create [`cleanup.js`](#page_facing_up-cleanupjs-structuresample-page_facing_up) in the root dir of the boilerplate
+ 2. create [`setup.js`](#page_facing_up-cleanupjs-structuresample-page_facing_up) in the root dir of the boilerplate
  3. note what it would take (files removed, added, modified) to remove unnecessary code/files
- 4. inject the item changes in the `cleanup.js` configuration
+ 4. inject the item changes in the `setup.js` configuration
  5. create an npm script i.e. `"cleanup": "mop -v"`
 
-## :page_facing_up: `cleanup.js` structure/sample :page_facing_up:
+## :page_facing_up: `setup.js` structure/sample :page_facing_up:
 
 *The below example uses a cleanup configuration for the extremely useful [electron-react-boilerplate](https://github.com/chentsulin/electron-react-boilerplate)*
 
