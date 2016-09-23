@@ -25,14 +25,26 @@ const cleanupConfig = config(workingDir);
 // remove files to be removed
 if (cleanupConfig.remove) {
   cleanupConfig.remove.forEach((fileConfig) => {
-    fileOps.remove(`${workingDir}/${fileConfig.file}`, (err) => {
-      if (err) {
-        displayError(err);
-      }
-      else {
-        displayInformation(`removed ${fileConfig.file}`, program.verbose);
-      }
-    });
+    if (fileConfig.file) {
+      fileOps.remove(`${workingDir}/${fileConfig.file}`, (err) => {
+        if (err) {
+          displayError(err);
+        }
+        else {
+          displayInformation(`removed ${fileConfig.file}`, program.verbose);
+        }
+      });
+    }
+    else if (fileConfig.folder) {
+      fileOps.removeFolder(`${workingDir}/${fileConfig.folder}`, (err) => {
+        if (err) {
+          displayError(err);
+        }
+        else {
+          displayInformation(`removed ${fileConfig.folder}`, program.verbose);
+        }
+      });
+    }
   });
 }
 
