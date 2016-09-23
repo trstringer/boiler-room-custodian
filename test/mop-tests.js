@@ -6,6 +6,7 @@ const remove = require('../app/modules/file-ops').remove;
 const add = require('../app/modules/file-ops').add;
 const clear = require('../app/modules/file-ops').clear;
 const deleteLine = require('../app/modules/file-ops').deleteLine;
+const removeFolder = require('../app/modules/file-ops').removeFolder;
 
 /* eslint-disable no-undef */
 describe('moperations', () => {
@@ -16,13 +17,23 @@ describe('moperations', () => {
     done();
   });
 
-  it('should remove files', (done) => {
+  it('should remove files and folders', (done) => {
     mopConfig.remove.forEach((fileConfig, index, array) => {
-      const fileToRemove = `${mopConfig.rootdir}/${fileConfig.file}`; 
-      remove(fileToRemove, assert.isFalse);
-      testUtil.fileExists(fileToRemove, assert.isFalse);
-      if (index === array.length - 1) {
-        done();
+      if (fileConfig.file) {
+        const fileToRemove = `${mopConfig.rootdir}/${fileConfig.file}`; 
+        remove(fileToRemove, assert.isFalse);
+        testUtil.fileExists(fileToRemove, assert.isFalse);
+        if (index === array.length - 1) {
+          done();
+        }
+      }
+      else if (fileConfig.folder) {
+        const folderToRemove = `${mopConfig.rootdir}/${fileConfig.folder}`;
+        removeFolder(folderToRemove, assert.isFalse);
+        testUtil.fileExists(folderToRemove, assert.isFalse);
+        if (index === array.length - 1) {
+          done();
+        }
       }
     });
   });

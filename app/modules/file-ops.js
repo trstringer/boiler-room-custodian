@@ -1,5 +1,6 @@
 const fs = require('fs');
 const readline = require('readline');
+const rimraf = require('rimraf');
 
 module.exports = (() => {
   function add(file, callback) {
@@ -37,10 +38,15 @@ module.exports = (() => {
     });
   }
 
+  function removeFolder(folder, callback) {
+    rimraf(folder, ['rmdir'], callback);
+  }
+
   return {
     remove: fs.unlink,
     add,
     clear,
-    deleteLine
+    deleteLine,
+    removeFolder
   };
 })();

@@ -2,7 +2,8 @@ module.exports = {
   remove: [
     { file: 'test-file1.txt' },
     { file: 'test-file2.txt' },
-    { file: 'test-file4.txt' }
+    { file: 'test-file4.txt' },
+    { folder: 'child-dir2' }
   ],
   clean: [
     {
