@@ -1,0 +1,9 @@
+/demo.gif
+
+# from .gitignore
+.vscode/
+node_modules/
+typings/
+jsconfig.json
+npm-debug.log
+*.tgz
