@@ -85,10 +85,27 @@ if (cleanupConfig.clean) {
           }
           else {
             displayInformation(
-              `removed line in ${fileConfig.file} matching ${fileConfig.pattern.toString()}`, 
+              `removed line in ${fileConfig.file} matching ${fileConfig.pattern.toString()}`,
               program.verbose);
           }
         });
+    }
+    else if (fileConfig.deleteRange) {
+      fileOps.deleteRange(
+        `${workingDir}/${fileConfig.file}`,
+        fileConfig.deleteRange,
+        (err) => {
+          if (err) {
+            displayError(err);
+          }
+          else {
+            displayInformation(
+              `deleted line range in ${fileConfig.file} for ${fileConfig.deleteRange}`,
+              program.verbose
+            );
+          }
+        }
+      )
     }
   });
 }
