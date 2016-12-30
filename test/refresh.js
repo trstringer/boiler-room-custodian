@@ -58,7 +58,8 @@ module.exports = (done) => {
     removeFile(`${__dirname}/repo/child-dir/.gitkeep`),
     createFolder(`${__dirname}/repo/child-dir2`),
     copyFile(`${__dirname}/repo/test-file6.save.txt`, `${__dirname}/repo/child-dir2/test-file6.txt`),
-    copyFile(`${__dirname}/repo/test-file7.save.txt`, `${__dirname}/repo/child-dir2/test-file7.txt`)
+    copyFile(`${__dirname}/repo/test-file7.save.txt`, `${__dirname}/repo/child-dir2/test-file7.txt`),
+    copyFile(`${__dirname}/repo/test-file8.save.txt`, `${__dirname}/repo/test-file8.txt`)
   ])
     .then(() => done())
     .catch((err) => {

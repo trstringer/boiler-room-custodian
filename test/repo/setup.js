@@ -13,6 +13,10 @@ module.exports = {
     {
       file: 'child-dir/test-file5.txt',
       pattern: /blah/
+    },
+    {
+      file: 'test-file8.txt',
+      deleteRange: '3,12'
     }
   ],
   add: [

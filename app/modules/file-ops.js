@@ -63,9 +63,28 @@ module.exports = (() => {
         callback(Error('Incorrect line range format'));
       }
       else {
-        // loop through all of the lines in the source file
-        // if the range falls into the delete range then don't
-        // copy those lines into the temp destination
+        let lineNumber = 1;
+        source.on('line', (line) => {
+          if (lineNumber < startLineNumber || lineNumber > endLineNumber) {
+            if (lineNumber > 1) {
+              tempFileStream.write('\n');
+            }
+            tempFileStream.write(`${line}`);
+          }
+          lineNumber++;
+        });
+        source.on('close', () => {
+          tempFileStream.close();
+          // delete the old file and rename the temp file
+          fs.unlink(file, (err) => {
+            if (err) {
+              callback(err);
+            }
+            else {
+              fs.rename(tempFileName, file, callback);
+            }
+          });
+        });
       }
     }
   }
@@ -79,6 +98,7 @@ module.exports = (() => {
     add,
     clear,
     deleteLine,
+    deleteRange,
     removeFolder
   };
 })();

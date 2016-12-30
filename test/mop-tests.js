@@ -1,4 +1,5 @@
-const assert = require('chai').assert;
+const chai = require('chai');
+const assert = chai.assert;
 const testUtil = require('./util');
 const refresh = require('./refresh');
 const config = require('../app/modules/config');
@@ -6,7 +7,10 @@ const remove = require('../app/modules/file-ops').remove;
 const add = require('../app/modules/file-ops').add;
 const clear = require('../app/modules/file-ops').clear;
 const deleteLine = require('../app/modules/file-ops').deleteLine;
+const deleteRange = require('../app/modules/file-ops').deleteRange;
 const removeFolder = require('../app/modules/file-ops').removeFolder;
+
+chai.config.includeStack = true;
 
 /* eslint-disable no-undef */
 describe('moperations', () => {
@@ -60,6 +64,12 @@ describe('moperations', () => {
       else if (fileConfig.pattern) {
         deleteLine(fileToClean, fileConfig.pattern, () => {
           testUtil.fileContainsPattern(fileToClean, fileConfig.pattern, assert.isFalse);
+        });
+      }
+      else if (fileConfig.deleteRange) {
+        deleteRange(fileToClean, fileConfig.deleteRange, (err) => {
+          assert.isNull(err);
+          testUtil.fileContainsLineCount(fileToClean, 10, assert.isTrue);
         });
       }
 

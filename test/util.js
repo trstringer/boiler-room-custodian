@@ -28,10 +28,23 @@ module.exports = (() => {
       }
     });
   }
+
+  function fileContainsLineCount(file, lineCount, callback) {
+    fs.readFile(file, 'utf8', (err, data) => {
+      if (err) {
+        throw err;
+      }
+      else {
+        const count = data.split('\n').length;
+        callback(lineCount === count);
+      }
+    });
+  }
   
   return {
     fileExists,
     fileIsEmpty,
-    fileContainsPattern
+    fileContainsPattern,
+    fileContainsLineCount
   };
 })();
