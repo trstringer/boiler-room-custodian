@@ -120,7 +120,7 @@ if (cleanupConfig.clean) {
             `deleted ${fileConfig.replace.length} matching patterns in ${fileConfig.file}`,
             program.verbose
           );
-        };
+        }
       );
     }
   });
