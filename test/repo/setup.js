@@ -21,7 +21,7 @@ module.exports = {
     {
       file: 'test-file9.txt',
       replace: [
-        { pattern: /hello/, substitute: 'goodbye' },
+        { pattern: /hello/, substitute: 'hey' },
         { pattern: /world/, substitute: 'universe' }
       ]
     }

@@ -89,7 +89,34 @@ module.exports.deleteRange = function (file, range, callback) {
 };
 
 module.exports.replace = function (file, replaceList, callback) {
-  callback(Error('not implemented'));
+  const source = readline.createInterface({
+    input: fs.createReadStream(file)
+  });
+
+  const tempFileName = `${file}.tmp`;
+  const tempFileStream = fs.createWriteStream(tempFileName);
+
+  const replaceListCount = replaceList.length;
+  source.on('line', (line) => {
+    for (let i = 0; i < replaceListCount; i++) {
+      line = line.replace(
+        replaceList[i].pattern,
+        replaceList[i].substitute);
+    }
+    tempFileStream.write(`${line}\n`);
+  });
+  source.on('close', () => {
+    tempFileStream.close();
+    // delete the old file and rename the temp file
+    fs.unlink(file, (err) => {
+      if (err) {
+        callback(err);
+      }
+      else {
+        fs.rename(tempFileName, file, callback);
+      }
+    });
+  })
 };
 
 module.exports.removeFolder = function (folder, callback) {
