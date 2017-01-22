@@ -24,7 +24,7 @@ describe('moperations', () => {
   it('should remove files and folders', (done) => {
     mopConfig.remove.forEach((fileConfig, index, array) => {
       if (fileConfig.file) {
-        const fileToRemove = `${mopConfig.rootdir}/${fileConfig.file}`; 
+        const fileToRemove = `${mopConfig.rootdir}/${fileConfig.file}`;
         remove(fileToRemove, assert.isFalse);
         testUtil.fileExists(fileToRemove, assert.isFalse);
         if (index === array.length - 1) {
@@ -56,7 +56,7 @@ describe('moperations', () => {
   it('should clean files', (done) => {
     mopConfig.clean.forEach((fileConfig, index, array) => {
       const fileToClean = `${mopConfig.rootdir}/${fileConfig.file}`;
-      
+
       if (fileConfig.clear) {
         clear(fileToClean, (err) => assert.isNull(err));
         testUtil.fileIsEmpty(fileToClean, assert.isFalse);
