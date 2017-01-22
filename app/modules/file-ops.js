@@ -2,103 +2,98 @@ const fs = require('fs');
 const readline = require('readline');
 const rimraf = require('rimraf');
 
-module.exports = (() => {
-  function add(file, callback) {
-    fs.open(file, 'a', callback);
-  }
+module.exports.add = function (file, callback) {
+  fs.open(file, 'a', callback);
+};
 
-  function clear(file, callback) {
-    fs.writeFile(file, '', callback);
-  }
+module.exports.clear = function (file, callback) {
+  fs.writeFile(file, '', callback);
+};
 
-  function deleteLine(file, pattern, callback) {
-    const source = readline.createInterface({
-      input: fs.createReadStream(file)
-    });
+module.exports.deleteLine = function (file, pattern, callback) {
+  const source = readline.createInterface({
+    input: fs.createReadStream(file)
+  });
 
-    const tempFileName = `${file}.tmp`;
-    const tempFileStream = fs.createWriteStream(tempFileName);
+  const tempFileName = `${file}.tmp`;
+  const tempFileStream = fs.createWriteStream(tempFileName);
 
-    source.on('line', (line) => {
-      if (!line.match(pattern)) {
-        tempFileStream.write(`${line}\n`);
-      }
-    });
-    source.on('close', () => {
-      tempFileStream.close();
-      // delete the old file and rename the temp file
-      fs.unlink(file, (err) => {
-        if (err) {
-          callback(err);
-        }
-        else {
-          fs.rename(tempFileName, file, callback);
-        }
-      });
-    });
-  }
-
-  function deleteRange(file, range, callback) {
-    const source = readline.createInterface({
-      input: fs.createReadStream(file)
-    });
-
-    const tempFileName = `${file}.tmp`;
-    const tempFileStream = fs.createWriteStream(tempFileName);
-
-    // if the range is a single digit value (i.e. '4') then just delete
-    // the single line. Otherwise if it is a range in the format of
-    // 'start,end' then remove from this line range inclusively
-    let startLineNumber, endLineNumber;
-    const singleLine = Number(range);
-    if (singleLine) {
-      startLineNumber = singleLine;
-      endLineNumber = singleLine;
+  source.on('line', (line) => {
+    if (!line.match(pattern)) {
+      tempFileStream.write(`${line}\n`);
     }
-    else {
-      const rangeMatch = /(\d+),(\d+)/.exec(range);
-      startLineNumber = Number(rangeMatch[1]);
-      endLineNumber = Number(rangeMatch[2]);
-      if (!startLineNumber || !endLineNumber) {
-        callback(Error('Incorrect line range format'));
+  });
+  source.on('close', () => {
+    tempFileStream.close();
+    // delete the old file and rename the temp file
+    fs.unlink(file, (err) => {
+      if (err) {
+        callback(err);
       }
       else {
-        let lineNumber = 1;
-        source.on('line', (line) => {
-          if (lineNumber < startLineNumber || lineNumber > endLineNumber) {
-            if (lineNumber > 1) {
-              tempFileStream.write('\n');
-            }
-            tempFileStream.write(`${line}`);
-          }
-          lineNumber++;
-        });
-        source.on('close', () => {
-          tempFileStream.close();
-          // delete the old file and rename the temp file
-          fs.unlink(file, (err) => {
-            if (err) {
-              callback(err);
-            }
-            else {
-              fs.rename(tempFileName, file, callback);
-            }
-          });
-        });
+        fs.rename(tempFileName, file, callback);
       }
+    });
+  });
+};
+
+module.exports.deleteRange = function (file, range, callback) {
+  const source = readline.createInterface({
+    input: fs.createReadStream(file)
+  });
+
+  const tempFileName = `${file}.tmp`;
+  const tempFileStream = fs.createWriteStream(tempFileName);
+
+  // if the range is a single digit value (i.e. '4') then just delete
+  // the single line. Otherwise if it is a range in the format of
+  // 'start,end' then remove from this line range inclusively
+  let startLineNumber, endLineNumber;
+  const singleLine = Number(range);
+  if (singleLine) {
+    startLineNumber = singleLine;
+    endLineNumber = singleLine;
+  }
+  else {
+    const rangeMatch = /(\d+),(\d+)/.exec(range);
+    startLineNumber = Number(rangeMatch[1]);
+    endLineNumber = Number(rangeMatch[2]);
+    if (!startLineNumber || !endLineNumber) {
+      callback(Error('Incorrect line range format'));
+    }
+    else {
+      let lineNumber = 1;
+      source.on('line', (line) => {
+        if (lineNumber < startLineNumber || lineNumber > endLineNumber) {
+          if (lineNumber > 1) {
+            tempFileStream.write('\n');
+          }
+          tempFileStream.write(`${line}`);
+        }
+        lineNumber++;
+      });
+      source.on('close', () => {
+        tempFileStream.close();
+        // delete the old file and rename the temp file
+        fs.unlink(file, (err) => {
+          if (err) {
+            callback(err);
+          }
+          else {
+            fs.rename(tempFileName, file, callback);
+          }
+        });
+      });
     }
   }
+};
 
-  function removeFolder(folder, callback) {
-    rimraf(folder, ['rmdir'], callback);
-  }
+module.exports.replace = function (file, replaceList, callback) {
+  callback(Error('not implemented'));
+};
 
-  return {
-    remove: fs.unlink,
-    add,
-    clear,
-    deleteLine,
-    deleteRange,
-    removeFolder
-  };
-})();
+module.exports.removeFolder = function (folder, callback) {
+  rimraf(folder, ['rmdir'], callback);
+};
+
+module.exports.remove = fs.unlink;

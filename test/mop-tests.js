@@ -9,6 +9,7 @@ const clear = require('../app/modules/file-ops').clear;
 const deleteLine = require('../app/modules/file-ops').deleteLine;
 const deleteRange = require('../app/modules/file-ops').deleteRange;
 const removeFolder = require('../app/modules/file-ops').removeFolder;
+const replace = require('../app/modules/file-ops').replace;
 
 chai.config.includeStack = true;
 
@@ -70,6 +71,11 @@ describe('moperations', () => {
         deleteRange(fileToClean, fileConfig.deleteRange, (err) => {
           assert.isNull(err);
           testUtil.fileContainsLineCount(fileToClean, 10, assert.isTrue);
+        });
+      }
+      else if (fileConfig.replace) {
+        replace(fileToClean, fileConfig.replace, err => {
+          assert.isNull(err);
         });
       }
 

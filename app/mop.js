@@ -107,5 +107,21 @@ if (cleanupConfig.clean) {
         }
       )
     }
+    else if (fileConfig.replace) {
+      fileOps.replace(
+        `${workingDir}/${fileConfig.file}`,
+        fileConfig.replace,
+        err => {
+          if (err) {
+            displayError(err);
+            return;
+          }
+          displayInformation(
+            `deleted ${fileConfig.replace.length} matching patterns in ${fileConfig.file}`,
+            program.verbose
+          );
+        };
+      );
+    }
   });
 }

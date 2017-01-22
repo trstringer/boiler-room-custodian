@@ -17,6 +17,13 @@ module.exports = {
     {
       file: 'test-file8.txt',
       deleteRange: '3,12'
+    },
+    {
+      file: 'test-file9.txt',
+      replace: [
+        { pattern: /hello/, substitute: 'goodbye' },
+        { pattern: /world/, substitute: 'universe' }
+      ]
     }
   ],
   add: [

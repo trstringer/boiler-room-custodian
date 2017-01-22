@@ -1,0 +1,7 @@
+i just want to say hello to
+the world. hello is typically
+what you say when you are seeing
+somebody for the first time, in this
+case we are using the word "world"
+as it is a common programming thing to say
+"hello world".
