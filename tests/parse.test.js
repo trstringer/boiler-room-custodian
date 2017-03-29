@@ -2,15 +2,15 @@ const parse = require('../src/parse');
 
 const testArtifact = `this is my test
 this should show things to remove
-// brc rm
+   // brc
 this should be a single removed line
 
-// brc rmchunk start
+// brc start
 this should be multiple lines
 that should be removed
-// brc rmchunk end
+// brc end
 
-this line should also be removed // brc rm
+this line should also be removed // brc
 
 but this line will never be removed`;
 // 13 total lines before
@@ -21,6 +21,6 @@ test('make sure we do not break the test artifact', () => {
 });
 
 test('lines should be parsed', () => {
-  const output = parse(testArtifact);
+  const output = parse(testArtifact, false);
   expect(output.split('\n').length).toBe(6);
 });
