@@ -1,3 +1,0 @@
-this is test file 5
-here is the blah line i want to remove
-just another line in this file
