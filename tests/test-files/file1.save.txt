@@ -1,0 +1,26 @@
+this is a test file
+
+// brc
+this line should be removed
+
+this line will not be
+nor will this one
+but this one will be removed // brc
+
+      // brc    
+so will this one
+
+and even this one    //    brc  
+
+// brc start
+this will be removed
+so will this
+// brc end
+
+will not be removed
+    //    brc start  
+but this will
+and this
+ //     brc end   
+
+this will remain
