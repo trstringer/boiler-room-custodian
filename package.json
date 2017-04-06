@@ -7,7 +7,7 @@
     "mop": "./bin/mop"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest && ./tests/test-files/reset.sh",
     "test-debug": "node --debug-brk ./node_modules/.bin/jest --runInBand"
   },
   "keywords": [],
