@@ -7,7 +7,8 @@
     "mop": "./bin/mop"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test-debug": "node --debug-brk ./node_modules/.bin/jest --runInBand"
   },
   "keywords": [],
   "author": "Thomas Stringer",
