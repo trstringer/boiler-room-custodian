@@ -7,9 +7,21 @@ module.exports = (input, verbose) => {
   const currentSingleLineRegex = /\/\/\s*brc\s*$/;
   const chunkStartRegex = /^\s*\/\/\s*brc start\s*$/;
   const chunkEndRegex = /^\s*\/\/\s*brc end\s*$/;
+  const clearFileRegex = /^\s*\/\/\s*brc clear\s*$/;
+  const removeFileRegex = /^\s*\/\/\s*brc remove\s*$/;
 
   let outputBuffer = '';
   let insideChunk = false;
+
+  // test the first line to see if we need to clear or remove the file
+  if (lines[0].match(clearFileRegex)) {
+    logger.display(`clear all lines [${lines[0]}]`, logger.INFORMATION, verbose);
+    return '';
+  }
+  else if (lines[0].match(removeFileRegex)) {
+    logger.display(`remove file [${lines[0]}]`, logger.INFORMATION, verbose);
+    return null;
+  }
 
   for (let i = 0; i < lines.length; i++) {
     if (insideChunk) {
