@@ -5,10 +5,10 @@ module.exports = (input, verbose) => {
 
   const nextSingleLineRegex = /^\s*\/\/\s*brc\s*$/;
   const currentSingleLineRegex = /\/\/\s*brc\s*$/;
-  const chunkStartRegex = /^\s*\/\/\s*brc start\s*$/;
-  const chunkEndRegex = /^\s*\/\/\s*brc end\s*$/;
-  const clearFileRegex = /^\s*\/\/\s*brc clear\s*$/;
-  const removeFileRegex = /^\s*\/\/\s*brc remove\s*$/;
+  const chunkStartRegex = /^\s*\/\/\s*brc\s+start\s*$/;
+  const chunkEndRegex = /^\s*\/\/\s*brc\s+end\s*$/;
+  const clearFileRegex = /^\s*\/\/\s*brc\s+clear\s*$/;
+  const removeFileRegex = /^\s*\/\/\s*brc\s+remove\s*$/;
 
   let outputBuffer = '';
   let insideChunk = false;
