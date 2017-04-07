@@ -7,7 +7,9 @@
     "mop": "./bin/mop"
   },
   "scripts": {
-    "test": "jest && ./tests/test-files/reset.sh",
+    "test": "npm run test-jest && npm run test-reset",
+    "test-jest": "jest",
+    "test-reset": "./tests/test-files/reset.sh",
     "test-debug": "node --debug-brk ./node_modules/.bin/jest --runInBand"
   },
   "keywords": [],

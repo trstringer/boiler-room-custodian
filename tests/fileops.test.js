@@ -8,22 +8,28 @@ test('file is cleared', done => {
     'test-files/file2.txt'
   );
 
-  fileops.readFile(pathToFile)
-    .then(data => parse(data))
-    .then(data => {
-      if (data === '') {
-        return fileops.clearFile(pathToFile);
-      }
-      else if (data === null) {
-        return fileops.deleteFile(pathToFile);
-      }
-      else {
-        return fileops.changeFile(pathToFile, data);
-      }
-    })
+  fileops.parseFile(pathToFile)
     .then(() => fileops.readFile(pathToFile))
     .then(data => {
       expect(data).toBe('');
+      done();
+    })
+    .catch(err => {
+      expect(err).toBeFalsy();
+      done();
+    });
+});
+
+test('file is deleted', done => {
+  const pathToFile = path.join(
+    __dirname,
+    'test-files/file3.txt'
+  );
+
+  fileops.parseFile(pathToFile)
+    .then(() => fileops.fileExists(pathToFile))
+    .then(exists => {
+      expect(exists).toBeFalsy();
       done();
     })
     .catch(err => {

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const parse = require('./parse');
 
 function changeFile(file, contents) {
   return new Promise((resolve, reject) => {
@@ -40,7 +41,41 @@ function readFile(file) {
   });
 }
 
+function fileExists(file) {
+  return new Promise((resolve, reject) => {
+    fs.stat(file, (err, stat) => {
+      if (stat) {
+        resolve(true);
+        return;
+      }
+      else if (err && err.code === 'ENOENT') {
+        resolve(false);
+        return;
+      }
+      reject(err);
+    });
+  });
+}
+
+function parseFile(file) {
+  return readFile(file)
+    .then(data => parse(data))
+    .then(parsedData => {
+      if (parsedData === '') {
+        return clearFile(file);
+      }
+      else if (parsedData === null) {
+        return deleteFile(file);
+      }
+      else {
+        return changeFile(file, parsedData);
+      }
+    });
+}
+
 module.exports.changeFile = changeFile;
 module.exports.clearFile = clearFile;
 module.exports.deleteFile = deleteFile;
 module.exports.readFile = readFile;
+module.exports.fileExists = fileExists;
+module.exports.parseFile = parseFile;
