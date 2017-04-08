@@ -70,3 +70,21 @@ test('file is parsed', done => {
       done();
     });
 });
+
+test('file is created', done => {
+  const pathToFile = path.join(
+    __dirname,
+    'test-files/newfile.txt'
+  );
+
+  fileops.addFile(pathToFile)
+    .then(() => fileops.fileExists(pathToFile))
+    .then(exists => {
+      expect(exists).toBeTruthy();
+      done();
+    })
+    .catch(err => {
+      expect(err).toBeFalsy();
+      done();
+    });
+});

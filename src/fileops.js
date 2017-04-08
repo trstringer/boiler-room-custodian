@@ -1,3 +1,4 @@
+const cons = require('constants');
 const fs = require('fs');
 const parse = require('./parse');
 
@@ -57,6 +58,18 @@ function fileExists(file) {
   });
 }
 
+function addFile(file) {
+  return new Promise((resolve, reject) => {
+    fs.open(file, cons.O_CREAT, err => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+  });
+}
+
 function parseFile(file) {
   return readFile(file)
     .then(data => parse(data))
@@ -78,4 +91,5 @@ module.exports.clearFile = clearFile;
 module.exports.deleteFile = deleteFile;
 module.exports.readFile = readFile;
 module.exports.fileExists = fileExists;
+module.exports.addFile = addFile;
 module.exports.parseFile = parseFile;
