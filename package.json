@@ -1,6 +1,6 @@
 {
   "name": "boiler-room-custodian",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Mop up those boilerplates",
   "main": "./bin/mop",
   "bin": {
