@@ -11,29 +11,28 @@ module.exports.clear = function (file, callback) {
 };
 
 module.exports.deleteLine = function (file, pattern, callback) {
-  const source = readline.createInterface({
-    input: fs.createReadStream(file)
-  });
-
-  const tempFileName = `${file}.tmp`;
-  const tempFileStream = fs.createWriteStream(tempFileName);
-
-  source.on('line', (line) => {
-    if (!line.match(pattern)) {
-      tempFileStream.write(`${line}\n`);
+  fs.readFile(file, 'utf8', (err, data) => {
+    if (err) {
+      callback(err);
+      return;
     }
-  });
-  source.on('close', () => {
-    tempFileStream.close();
-    // delete the old file and rename the temp file
-    fs.unlink(file, (err) => {
-      if (err) {
-        callback(err);
+
+    const lines = data.split('\n');
+    let tempOutput = '';
+    let i = 0;
+    let max = lines.length;
+    for (i = 0; i < max; i++) {
+      if (!lines[i].match(pattern)) {
+        if (tempOutput === '') {
+          tempOutput = lines[i];
+        }
+        else {
+          tempOutput += `\n${lines[i]}`;
+        }
       }
-      else {
-        fs.rename(tempFileName, file, callback);
-      }
-    });
+    }
+
+    fs.writeFile(file, tempOutput, 'utf8', callback);
   });
 };
 

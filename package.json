@@ -7,7 +7,7 @@
     "mop": "./bin/mop"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha && ./test/refresh.sh"
   },
   "keywords": [],
   "author": "Thomas Stringer",

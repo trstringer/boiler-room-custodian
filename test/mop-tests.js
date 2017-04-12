@@ -1,7 +1,6 @@
 const chai = require('chai');
 const assert = chai.assert;
 const testUtil = require('./util');
-const refresh = require('./refresh');
 const config = require('../app/modules/config');
 const remove = require('../app/modules/file-ops').remove;
 const add = require('../app/modules/file-ops').add;
@@ -84,7 +83,5 @@ describe('moperations', () => {
       }
     });
   });
-
-  after(refresh);
 });
 /* eslint-enable no-undef */
